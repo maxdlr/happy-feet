@@ -1,17 +1,16 @@
-let points = [[], [], []];
-let inTangents = [];
-let outTangents = [];
+let points = [[], [], [], []];
+let inTangents = [[0,0], [0,0], [0,0], [0,0]];
+let outTangents = [[0,0], [0,0], [0,0], [0,0]];
 
-const joints = ["Ankle", "Bunion"]
+const bendLeader = thisComp.layer("Null 10").transform.position;
 
-const group = thisComp.layer("Foot").content("articulations");
-const firstArticulation = group.content(joints[0]);
-const secondArticulation = group.content(joints[1]);
+const firstArticulation = thisComp.layer("Foot").content("Articulations").content("Ankle");
+const secondArticulation = thisComp.layer("Foot").content("Articulations").content("Bunion");
 
 const firstArticulationPos = firstArticulation.transform.position;
-const firstArticulationRadius = firstArticulation.content(joints[0] + " - Ellipse").size[0]/2;
+const firstArticulationRadius = firstArticulation.content("Ankle - Ellipse").size[0]/2;
 const secondArticulationPos = secondArticulation.transform.position;
-const secondArticulationRadius = secondArticulation.content(joints[1] + " - Ellipse").size[0]/2;
+const secondArticulationRadius = secondArticulation.content("Bunion - Ellipse").size[0]/2;
 
 // Calculate the tangent point coordinates
 function getPerpendicularPoint(centerPos, radius, referencePos, angleOffset) {
@@ -34,5 +33,6 @@ const fourPoint = getPerpendicularPoint(secondArticulationPos, secondArticulatio
 const threePoint = getPerpendicularPoint(secondArticulationPos, secondArticulationRadius, firstArticulationPos, Math.PI/2);
 
 points = [onePoint, twoPoint, threePoint, fourPoint]
+inTangents[0] = bendLeader - points[0];
 
-createPath(points, inTangents, outTangents, false)
+createPath(points, inTangents, outTangents, true)
