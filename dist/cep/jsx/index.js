@@ -183,8 +183,8 @@
 
 var config = {
   version: version,
-  id: "com.maxorbe.cep",
-  displayName: "MaxOrbe",
+  id: "com.happy-feet.cep",
+  displayName: "Happy Feet",
   symlink: "local",
   port: 3000,
   servePort: 5000,
@@ -206,7 +206,7 @@ var config = {
   panels: [{
     mainPath: "./main/index.html",
     name: "main",
-    panelDisplayName: "MaxOrbe",
+    panelDisplayName: "Happy Feet",
     autoVisible: true,
     width: 600,
     height: 650
